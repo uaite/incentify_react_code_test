@@ -11,8 +11,8 @@ In this assignment, we'll be rendering a collection of pokemon, with data popula
 The primary purpose of this exercise is to illustrate familiarity with react, and to create something visually presentable.
 
 Main aspects:
-- fetch data from an api
-- state management
+- fetch data from an api (working with asynchronous code)
+- state management (familiarity with react)
 - UI / UX - note the details in the figma file. one criteria will be how close to the designs we can get. Details for assets, spacing, etc are provided in the figma. Note: the app should be responsive, eg. content stays centered, items wrap on screen width change. - two browser width are provided. (Our product team emphasizes attention to detail, according to the provided specifications.)
 
 Figma file:
@@ -54,13 +54,15 @@ To run the app:
 ## Pokeapi Reference
 
 documentation:
-https://pokeapi.co/docs/v2
+https://pokenode-ts.vercel.app/clients/pokemon-client
+
+which uses pokeapi the underlying, for reference: https://pokeapi.co/docs/v2
 
 
 
 ## Acceptance Criteria #1
 
-On app load, fetch pokemon data from `https://pokeapi.co/api/v2/pokemon?limit=151`, and render a collection of pokemon names
+On app load, fetch pokemon data from the api, and render a collection of pokemon names
 
 - display a list of names, arranged vertically
 
