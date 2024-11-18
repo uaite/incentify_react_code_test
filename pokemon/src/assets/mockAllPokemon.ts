@@ -1,4 +1,6 @@
-const all = [
+import { NamedAPIResource } from "pokenode-ts";
+
+const all: NamedAPIResource[] = [
   {
     name: "bulbasaur",
     url: "https://pokeapi.co/api/v2/pokemon/1/",

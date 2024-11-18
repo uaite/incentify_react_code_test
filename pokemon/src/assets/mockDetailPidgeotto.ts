@@ -1,4 +1,6 @@
-export default {
+import { Pokemon } from "pokenode-ts";
+
+const mockDetailPidgeotto: Pokemon = {
   abilities: [
     {
       ability: {
@@ -26,12 +28,12 @@ export default {
     },
   ],
   base_experience: 122,
-  cries: {
-    latest:
-      "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/17.ogg",
-    legacy:
-      "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/17.ogg",
-  },
+  // cries: {
+  //   latest:
+  //     "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/17.ogg",
+  //   legacy:
+  //     "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/17.ogg",
+  // },
   forms: [
     {
       name: "pidgeotto",
@@ -8380,7 +8382,7 @@ export default {
   ],
   name: "pidgeotto",
   order: 22,
-  past_abilities: [],
+  // past_abilities: [],
   past_types: [],
   species: {
     name: "pidgeotto",
@@ -8416,23 +8418,23 @@ export default {
       "official-artwork": {
         front_default:
           "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/17.png",
-        front_shiny:
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/17.png",
+        // front_shiny:
+        //   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/17.png",
       },
-      showdown: {
-        back_default:
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/back/17.gif",
-        back_female: null,
-        back_shiny:
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/back/shiny/17.gif",
-        back_shiny_female: null,
-        front_default:
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/17.gif",
-        front_female: null,
-        front_shiny:
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/shiny/17.gif",
-        front_shiny_female: null,
-      },
+      // showdown: {
+      //   back_default:
+      //     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/back/17.gif",
+      //   back_female: null,
+      //   back_shiny:
+      //     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/back/shiny/17.gif",
+      //   back_shiny_female: null,
+      //   front_default:
+      //     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/17.gif",
+      //   front_female: null,
+      //   front_shiny:
+      //     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/shiny/17.gif",
+      //   front_shiny_female: null,
+      // },
     },
     versions: {
       "generation-i": {
@@ -8721,3 +8723,5 @@ export default {
   ],
   weight: 300,
 };
+
+export default mockDetailPidgeotto;

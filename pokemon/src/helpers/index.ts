@@ -1,4 +1,4 @@
-import { ApiDetail } from "../fetchers/getPokemon";
+import { Pokemon } from "pokenode-ts";
 
 // pngs with color. helpful for the type chips in the UI
 import bugPng from "../assets/png-icons/bug.png";
@@ -54,7 +54,7 @@ export type AppPkmnDetail = {
 /**
  * helper function. given a pokemon from the api response, returns an object to be used in the app interface
  */
-function getAppPkmnDetailFromApi(apiPkmn: ApiDetail): AppPkmnDetail {
+function getAppPkmnDetailFromApi(apiPkmn: Pokemon): AppPkmnDetail {
   const hpStat = apiPkmn.stats.find(
     (stat) => stat.stat.name.toLowerCase() === "hp"
   );
@@ -68,7 +68,7 @@ function getAppPkmnDetailFromApi(apiPkmn: ApiDetail): AppPkmnDetail {
     name: apiPkmn.name,
     id: apiPkmn.id,
     hp: hpStat?.base_stat ?? 0,
-    image: apiPkmn.sprites.front_default,
+    image: apiPkmn.sprites.front_default ?? "",
     height: apiPkmn.height / 10, // assume this calculation results in meters
     weight: apiPkmn.weight / 10, // assume this calculation results in kilograms
     types: apiPkmn.types

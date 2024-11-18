@@ -1,21 +1,22 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { NamedAPIResource } from "pokenode-ts";
 
-import "./App.css";
-import mockAllPokemon from "./assets/mockAllPokemon";
-import mockDetailPidgeotto from "./assets/mockDetailPidgeotto";
+import mockAllPokemon from "./src/assets/mockAllPokemon";
+import mockDetailPidgeotto from "./src/assets/mockDetailPidgeotto";
 import {
-  ApiRow,
   fetchAllKantoPokemon,
   fetchPokemonDetail,
-} from "./fetchers/getPokemon";
+} from "./src/fetchers/getPokemon";
 import {
   AppPkmnDetail,
   getAppPkmnDetailFromApi,
   getImageConfigFromType,
-} from "./helpers";
+} from "./src/helpers";
 
 function App() {
-  const [pokemonCollection, setPokemonCollection] = useState<ApiRow[]>([]);
+  const [pokemonCollection, setPokemonCollection] = useState<
+    NamedAPIResource[]
+  >([]);
   const [selectedPkmn, setSelectedPkmn] = useState<AppPkmnDetail | undefined>(
     undefined
   );
