@@ -1,40 +1,32 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NamedAPIResource } from "pokenode-ts";
 
 import mockAllPokemon from "../assets/mockAllPokemon";
 import mockDetailPidgeotto from "../assets/mockDetailPidgeotto";
-import {
-  fetchAllKantoPokemon,
-  fetchPokemonDetail,
-} from "../fetchers/getPokemon";
+import mockSpeciesPidgeotto from "../assets/mockSpeciesPidgeotto";
 import {
   AppPkmnDetail,
   getAppPkmnDetailFromApi,
   getImageConfigFromType,
 } from "../helpers";
+// import AbilitySvg from "../assets/information-icons/ability.svg";
+// import HeightSvg from "../assets/information-icons/height.svg";
+// import WeightSvg from "../assets/information-icons/weight.svg";
+// import SpeciesSvg from "../assets/information-icons/species.svg";
 
 function App() {
-  const [pokemonCollection, setPokemonCollection] = useState<
-    NamedAPIResource[]
-  >([]);
+  // TODO: fetch list of pokemon from api #1 to #151, inclusive
+  const [pokemonCollection] = useState<NamedAPIResource[]>(mockAllPokemon);
+
   const [selectedPkmn, setSelectedPkmn] = useState<AppPkmnDetail | undefined>(
     undefined
   );
 
-  useEffect(() => {
-    if (pokemonCollection.length > 0) {
-      return;
-    }
-    // TODO: fetch pokemon
-    console.error("TODO", fetchAllKantoPokemon);
-    setPokemonCollection(mockAllPokemon);
-  }, []);
-
-  async function handlePokemonSelect() {
-    // TODO: fetch pokemon
-    console.error("TODO", fetchPokemonDetail);
-    const apiDetail = mockDetailPidgeotto;
-    const appDetail = getAppPkmnDetailFromApi(apiDetail);
+  function handlePokemonSelect() {
+    // TODO: fetch selected pokemon from api
+    const apiPokemon = mockDetailPidgeotto;
+    const apiSpecies = mockSpeciesPidgeotto;
+    const appDetail = getAppPkmnDetailFromApi(apiPokemon, apiSpecies);
     setSelectedPkmn(appDetail);
   }
 
