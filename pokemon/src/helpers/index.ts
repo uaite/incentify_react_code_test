@@ -1,4 +1,4 @@
-import { Pokemon } from "pokenode-ts";
+import { Pokemon, PokemonSpecies } from "pokenode-ts";
 
 // pngs with color. helpful for the type chips in the UI
 import bugPng from "../assets/png-icons/bug.png";
@@ -54,7 +54,10 @@ export type AppPkmnDetail = {
 /**
  * helper function. given a pokemon from the api response, returns an object to be used in the app interface
  */
-function getAppPkmnDetailFromApi(apiPkmn: Pokemon): AppPkmnDetail {
+function getAppPkmnDetailFromApi(
+  apiPkmn: Pokemon,
+  apiSpecies: PokemonSpecies
+): AppPkmnDetail {
   const hpStat = apiPkmn.stats.find(
     (stat) => stat.stat.name.toLowerCase() === "hp"
   );
@@ -64,13 +67,17 @@ function getAppPkmnDetailFromApi(apiPkmn: Pokemon): AppPkmnDetail {
       ? apiPkmn.abilities.map((ability) => ability.ability.name)[0]
       : "N/A";
 
+  const pkmnSpecies = apiSpecies.genera.find(
+    (genus) => genus.language.name === "en"
+  );
+
   return {
     name: apiPkmn.name,
     id: apiPkmn.id,
     hp: hpStat?.base_stat ?? 0,
     image: apiPkmn.sprites.front_default ?? "",
-    height: apiPkmn.height / 10, // assume this calculation results in meters
-    weight: apiPkmn.weight / 10, // assume this calculation results in kilograms
+    height: apiPkmn.height / 10, // api provides values in decimetres, this calculation results in meters
+    weight: apiPkmn.weight / 10, // api provides values in hectograms, this calculation results in kilograms
     types: apiPkmn.types
       .sort((typeA, typeB) => {
         if (typeA.slot > typeB.slot) {
@@ -83,7 +90,7 @@ function getAppPkmnDetailFromApi(apiPkmn: Pokemon): AppPkmnDetail {
       })
       .map((type) => type.type.name),
     ability: ability,
-    species: apiPkmn.species.name,
+    species: pkmnSpecies?.genus.replace(/( Pokémon| Pokemon)/, "") ?? "N/A",
   };
 }
 
