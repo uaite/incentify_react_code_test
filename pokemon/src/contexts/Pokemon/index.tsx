@@ -1,12 +1,12 @@
 import type { FC } from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { PokemonContextProps, PokemonContextValue } from './types';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import {
+  getPokemonClient,
   AppPkmnDetail,
   getAppPkmnDetailFromApi,
-  getPokemonClient,
-} from '../../helpers';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+} from '@helpers/index';
 
 const PokemonContext = createContext<PokemonContextValue | undefined>(
   undefined

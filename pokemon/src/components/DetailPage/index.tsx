@@ -1,15 +1,15 @@
 import clsx from 'clsx';
-import { usePokemon } from '../../context/Pokemon';
 import { GRADIENT_VARIANTS } from './constants';
-import TypeSvg from '../TypeSvg';
-import { PkmnNumberFormat } from '../../helpers/formatters';
-import TypeChip from '../TypeChip';
-import AbilitySvg from '../../assets/information-icons/ability.svg';
-import HeightSvg from '../../assets/information-icons/height.svg';
-import WeightSvg from '../../assets/information-icons/weight.svg';
-import SpeciesSvg from '../../assets/information-icons/species.svg';
-import StatChip from '../StatChip';
-import Spinner from '../Spinner';
+import AbilitySvg from '@assets/information-icons/ability.svg';
+import HeightSvg from '@assets/information-icons/height.svg';
+import WeightSvg from '@assets/information-icons/weight.svg';
+import SpeciesSvg from '@assets/information-icons/species.svg';
+import Spinner from '@components/Spinner';
+import StatChip from '@components/StatChip';
+import TypeChip from '@components/TypeChip';
+import TypeSvg from '@components/TypeSvg';
+import { PkmnNumberFormat } from '@helpers/formatters';
+import { usePokemon } from '@contexts/Pokemon';
 
 const DetailPage = () => {
   const { selected, isLoadingDetails } = usePokemon();

@@ -5,4 +5,12 @@ import svgr from 'vite-plugin-svgr';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), svgr()],
+  resolve: {
+    alias: {
+      '@components': '/src/components',
+      '@assets': '/src/assets',
+      '@helpers': '/src/helpers',
+      '@contexts': '/src/contexts',
+    },
+  },
 });

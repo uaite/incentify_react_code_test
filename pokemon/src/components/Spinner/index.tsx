@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import pokeball from '../../assets/pokeball.svg';
+import pokeball from '@assets/pokeball.svg';
 import { SpinnerProps } from './types';
 
 const Spinner: React.FC<SpinnerProps> = ({ className: propsClassName }) => {

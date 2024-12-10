@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import ListItem from '../ListItem';
 import { ListProps } from './types';
+import ListItem from '@components/ListItem';
 
 const List: React.FC<ListProps> = ({
   items,

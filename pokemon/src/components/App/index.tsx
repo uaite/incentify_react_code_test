@@ -1,6 +1,6 @@
-import List from '../List';
-import DetailPage from '../DetailPage';
-import { usePokemon } from '../../context/Pokemon';
+import DetailPage from '@components/DetailPage';
+import List from '@components/List';
+import { usePokemon } from '@contexts/Pokemon';
 import { useEffect } from 'react';
 
 function App() {

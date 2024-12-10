@@ -16,7 +16,15 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "baseUrl": "src",
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@contexts/*": ["./src/contexts/*"]
+    }
   },
   "include": ["vite.config.ts"]
 }
