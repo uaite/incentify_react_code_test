@@ -19,6 +19,7 @@ import psychic from '@assets/vector/psychic.svg?react';
 import rock from '@assets/vector/rock.svg?react';
 import steel from '@assets/vector/steel.svg?react';
 import water from '@assets/vector/water.svg?react';
+import clsx from 'clsx';
 
 const TypeSvg: React.FC<TypeSvgProps> = ({ type, className }) => {
   const SvgComponents: Record<
@@ -47,8 +48,10 @@ const TypeSvg: React.FC<TypeSvgProps> = ({ type, className }) => {
 
   const Component = SvgComponents[type];
 
+  const wrapperClassName = clsx(className, 'pointer-events-none');
+
   return (
-    <div {...{ className }}>
+    <div className={wrapperClassName}>
       <Component className="w-[400px] h-[400px] left-[-110px]" />
     </div>
   );
