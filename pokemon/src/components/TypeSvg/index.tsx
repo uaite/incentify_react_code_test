@@ -21,7 +21,10 @@ import steel from '@assets/vector/steel.svg?react';
 import water from '@assets/vector/water.svg?react';
 
 const TypeSvg: React.FC<TypeSvgProps> = ({ type, className }) => {
-  const SvgComponents: Record<string, React.FunctionComponent> = {
+  const SvgComponents: Record<
+    string,
+    React.FunctionComponent<{ className?: string }>
+  > = {
     bug,
     dark,
     dragon,
