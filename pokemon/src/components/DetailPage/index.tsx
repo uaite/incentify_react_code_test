@@ -40,11 +40,7 @@ const DetailPage = () => {
 
   return (
     <section className="relative h-full">
-      {isLoadingDetails && (
-        <div className="w-full h-full bg-black/25 absolute z-10">
-          <Spinner className="top-[50%] left-[50%]" />
-        </div>
-      )}
+      {isLoadingDetails && <Spinner />}
       <header className={headerClassName}>
         <TypeSvg
           type={mainType}

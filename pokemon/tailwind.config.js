@@ -32,6 +32,14 @@ export default {
       boxShadow: {
         'list-item': '0px 4px 4px 0px rgba(0, 0, 0, 25%);',
       },
+      animation: {
+        show: '600ms 100ms cubic-bezier(0.38, 0.97, 0.56, 0.76) forwards',
+      },
+      keyframes: {
+        show: {
+          '100%': { opacity: 1 },
+        },
+      },
     },
   },
   plugins: [],
