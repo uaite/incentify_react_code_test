@@ -19,7 +19,7 @@ const List: React.FC<ListProps> = ({
       {items.map((item) => (
         <ListItem
           {...item}
-          key={item.id}
+          key={item.name}
           textProp="name"
           data={item}
           onClick={(item) => {

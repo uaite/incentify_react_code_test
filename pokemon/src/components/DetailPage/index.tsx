@@ -14,9 +14,7 @@ import SpeciesSvg from '../../assets/information-icons/species.svg';
 import StatChip from '../StatChip';
 
 const DetailPage = () => {
-  const { list, loading, selected } = usePokemon();
-
-  console.log({ list, loading });
+  const { selected } = usePokemon();
 
   const {
     types,

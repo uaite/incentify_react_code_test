@@ -1,44 +1,66 @@
 import type { FC } from 'react';
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { PokemonContextProps, PokemonContextValue } from './types';
-import { NamedAPIResource, PokemonClient } from 'pokenode-ts';
+import { AppPkmnDetail, getPokemonClient } from '../../helpers';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 const PokemonContext = createContext<PokemonContextValue | undefined>(
   undefined
 );
 
 const PokemonProvider: FC<PokemonContextProps> = ({ children }) => {
-  const api = useMemo(() => new PokemonClient(), []);
-  const [loading, setLoading] = useState(false);
-  const [list, setList] = useState<NamedAPIResource[]>();
+  const client = getPokemonClient();
+  const [selectedName, setSelectedName] = useState('');
+  const [selected, setSelected] = useState<AppPkmnDetail | undefined>(
+    undefined
+  );
 
-  useEffect(() => {
-    setLoading(true);
-    const fetchInitialList = async () => {
-      try {
-        const request1 = api.listPokemons(0, 50);
-        const request2 = api.listPokemons(50, 50);
-        const request3 = api.listPokemons(100, 51);
+  const fetchPokemons = async ({ pageParam }) => {
+    const offset = Number(pageParam);
+    const res = await client.listPokemons(offset, offset === 100 ? 51 : 50);
+    return res;
+  };
 
-        const [resp1, resp2, resp3] = await Promise.all([
-          request1,
-          request2,
-          request3,
-        ]);
+  const fetchPokemonByName = async () => {
+    const res = await client.getPokemonByName(selectedName);
+    return res;
+  };
 
-        const newList = [...resp1.results, ...resp2.results, ...resp3.results];
+  const { data, isFetching, isFetchingNextPage, fetchNextPage } =
+    useInfiniteQuery({
+      queryKey: ['pokemonList'],
+      queryFn: fetchPokemons,
+      initialPageParam: '0',
+      maxPages: 3,
+      getNextPageParam: (lastPage) => {
+        const url = new URL(lastPage.next ?? '');
+        const offset = url.searchParams.get('offset');
+        return offset;
+      },
+    });
 
-        setList(newList);
-        console.log({ newList });
-      } finally {
-        setLoading(false);
-      }
-    };
+  const { data: pkmnData } = useQuery({
+    queryKey: ['pokemon', selectedName],
+    queryFn: fetchPokemonByName,
+    enabled: !!selectedName,
+  });
 
-    fetchInitialList();
-  }, [api]);
+  console.log({ pkmnData });
 
-  const value: PokemonContextValue = { list, api, loading };
+  const list =
+    data?.pages.reduce((acum, cur) => acum.concat(cur.results as []), []) ?? [];
+
+  const value: PokemonContextValue = {
+    list,
+    data,
+    selected,
+    isFetching,
+    isFetchingNextPage,
+    fetchNextPage,
+    setSelected,
+    selectedName,
+    setSelectedName,
+  };
 
   return (
     <PokemonContext.Provider {...{ value }}>{children}</PokemonContext.Provider>

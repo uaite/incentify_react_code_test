@@ -1,25 +1,28 @@
-import { useState } from 'react';
-import { NamedAPIResource } from 'pokenode-ts';
-
-import mockAllPokemon from '../assets/mockAllPokemon';
-
 import List from './List';
-import { ListEntry } from './List/types';
 import DetailPage from './DetailPage';
+import { usePokemon } from '../context/Pokemon';
+import { useEffect } from 'react';
 
 function App() {
-  // TODO: fetch list of pokemon from api #1 to #151, inclusive
-  const [pokemonCollection] = useState<NamedAPIResource[]>(mockAllPokemon);
+  const { list, fetchNextPage, setSelectedName } = usePokemon();
 
-  console.log({ pokemonCollection });
+  useEffect(() => {
+    setTimeout(() => {
+      fetchNextPage?.();
+    }, 3000);
+    setTimeout(() => {
+      fetchNextPage?.();
+    }, 6000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
       <div className="w-full h-full max-h-full flex gap-6">
         <List
-          items={pokemonCollection as unknown as ListEntry[]}
-          onItemClick={(item) => {
-            console.log('item clicked', { item });
+          items={list}
+          onItemClick={(name) => {
+            setSelectedName(name);
           }}
           className="w-1/3 max-w-[220px] bg-white"
         />

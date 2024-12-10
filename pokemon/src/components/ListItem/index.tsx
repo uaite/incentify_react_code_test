@@ -1,12 +1,20 @@
 import { ListItemProps } from './types';
 
-const ListItem: React.FC<ListItemProps> = ({ data, text, textProp }) => {
-  const actualText = text ?? data?.[textProp ?? ''];
-
-  console.log({ data, text, textProp });
+const ListItem: React.FC<ListItemProps> = ({
+  data,
+  text,
+  textProp,
+  onClick,
+}) => {
+  const textPropContent = Reflect.get(data ?? {}, textProp ?? '');
+  const actualText: string =
+    (typeof textPropContent === 'string' ? textPropContent : text) ?? '';
 
   return (
-    <button className="min-h-[30px] bg-silver rounded border-black border text-start px-2 shadow-list-item">
+    <button
+      onClick={() => onClick?.(actualText)}
+      className="min-h-[30px] bg-silver rounded border-black border text-start px-2 shadow-list-item"
+    >
       <p className="capitalize font-anonymous text-xs">
         {typeof actualText === 'string' ? actualText : ''}
       </p>

@@ -1,3 +1,5 @@
+import { NamedAPIResource } from 'pokenode-ts';
+
 export type ListEntry = {
   id: string;
   text?: string;
@@ -5,7 +7,7 @@ export type ListEntry = {
 };
 
 export type ListProps = {
-  items?: Array<ListEntry>;
+  items?: NamedAPIResource[];
   className?: string;
-  onItemClick?: (item: ListEntry) => void;
+  onItemClick?: (name: string) => void;
 };

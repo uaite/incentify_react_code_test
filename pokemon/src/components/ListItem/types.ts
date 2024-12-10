@@ -1,8 +1,8 @@
-import { ListEntry } from '../List/types';
+import { NamedAPIResource } from 'pokenode-ts';
 
 export type ListItemProps = {
-  data?: Record<string, unknown>;
+  data?: NamedAPIResource;
   text?: string;
   textProp?: string;
-  onClick?: (item: ListEntry) => void;
+  onClick?: (name: string) => void;
 };
