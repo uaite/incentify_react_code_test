@@ -46,7 +46,7 @@ const TypeSvg: React.FC<TypeSvgProps> = ({ type, className }) => {
 
   return (
     <div {...{ className }}>
-      <Component className="w-[330px] h-[330px]" />
+      <Component className="w-[400px] h-[400px] left-[-110px]" />
     </div>
   );
 };

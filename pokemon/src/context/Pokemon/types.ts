@@ -14,4 +14,5 @@ export type PokemonContextValue = {
   setSelected: Dispatch<SetStateAction<AppPkmnDetail | undefined>>;
   selectedName?: string;
   setSelectedName: Dispatch<SetStateAction<string>>;
+  isLoadingDetails?: UseInfiniteQueryResult['isLoading'];
 } & Partial<UseInfiniteQueryResult>;

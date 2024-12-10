@@ -9,9 +9,10 @@ import HeightSvg from '../../assets/information-icons/height.svg';
 import WeightSvg from '../../assets/information-icons/weight.svg';
 import SpeciesSvg from '../../assets/information-icons/species.svg';
 import StatChip from '../StatChip';
+import Spinner from '../Spinner';
 
 const DetailPage = () => {
-  const { selected } = usePokemon();
+  const { selected, isLoadingDetails } = usePokemon();
 
   if (!selected) {
     return null;
@@ -38,11 +39,19 @@ const DetailPage = () => {
   const formattedPkmnNo = PkmnNumberFormat.format(id);
 
   return (
-    <section>
+    <section className="relative h-full">
+      {isLoadingDetails && (
+        <div className="w-full h-full bg-black/25 absolute z-10">
+          <Spinner className="top-[50%] left-[50%]" />
+        </div>
+      )}
       <header className={headerClassName}>
-        <TypeSvg type={mainType} className="absolute" />
+        <TypeSvg
+          type={mainType}
+          className="absolute left-[-70px] top-[-70px]"
+        />
         <img
-          className="w-[288px] h-[288px] relative left-[71px] top-[84px]"
+          className="w-[288px] h-auto relative left-[71px] top-[84px] aspect-square"
           style={{ imageRendering: 'pixelated' }}
           src={pkmnSprite}
           aria-label={`${name} sprite`}
@@ -58,7 +67,7 @@ const DetailPage = () => {
           <TypeChip type={mainType} />
           <TypeChip type={secondaryType} />
         </div>
-        <div className="flex gap-5">
+        <div className="flex flex-wrap gap-5">
           <StatChip name="weight" iconSrc={WeightSvg} value={weight} />
           <StatChip name="height" iconSrc={HeightSvg} value={height} />
           <StatChip name="species" iconSrc={SpeciesSvg} value={species} />

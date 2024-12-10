@@ -46,7 +46,7 @@ const PokemonProvider: FC<PokemonContextProps> = ({ children }) => {
     return { pkmnData, speciesData };
   };
 
-  const { data: pkmnDetails } = useQuery({
+  const { data: pkmnDetails, isLoading: isLoadingDetails } = useQuery({
     queryKey: ['pokemon', selectedName],
     queryFn: fetchPokemonByName,
     enabled: !!selectedName,
@@ -69,6 +69,7 @@ const PokemonProvider: FC<PokemonContextProps> = ({ children }) => {
     isFetching,
     isFetchingNextPage,
     fetchNextPage,
+    isLoadingDetails,
     selected,
     setSelected,
     selectedName,

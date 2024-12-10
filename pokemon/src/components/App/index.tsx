@@ -9,10 +9,10 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       fetchNextPage?.();
-    }, 3000);
+    }, 2000);
     setTimeout(() => {
       fetchNextPage?.();
-    }, 6000);
+    }, 4000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -24,7 +24,7 @@ function App() {
           onItemClick={(name) => {
             setSelectedName(name);
           }}
-          className="w-1/3 max-w-[220px] bg-white"
+          className="min-w-[220px] max-w-[220px] bg-white"
         />
         <div className="w-full bg-white">
           <DetailPage />

@@ -13,7 +13,7 @@ const ListItem: React.FC<ListItemProps> = ({
   return (
     <button
       onClick={() => onClick?.(actualText)}
-      className="min-h-[30px] bg-silver rounded border-black border text-start px-2 shadow-list-item"
+      className="min-h-[30px] bg-silver rounded border-black border text-start px-2 shadow-list-item hover:opacity-80"
     >
       <p className="capitalize font-anonymous text-xs">
         {typeof actualText === 'string' ? actualText : ''}
