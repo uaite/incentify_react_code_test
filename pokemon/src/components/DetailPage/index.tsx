@@ -1,8 +1,5 @@
 import clsx from 'clsx';
-import mockDetailPidgeotto from '../../assets/mockDetailPidgeotto';
-import mockSpeciesPidgeotto from '../../assets/mockSpeciesPidgeotto';
 import { usePokemon } from '../../context/Pokemon';
-import { getAppPkmnDetailFromApi } from '../../helpers';
 import { GRADIENT_VARIANTS } from './constants';
 import TypeSvg from '../TypeSvg';
 import { PkmnNumberFormat } from '../../helpers/formatters';
@@ -16,6 +13,10 @@ import StatChip from '../StatChip';
 const DetailPage = () => {
   const { selected } = usePokemon();
 
+  if (!selected) {
+    return null;
+  }
+
   const {
     types,
     image: pkmnSprite,
@@ -25,8 +26,7 @@ const DetailPage = () => {
     ability,
     species,
     height,
-  } = selected ??
-  getAppPkmnDetailFromApi(mockDetailPidgeotto, mockSpeciesPidgeotto);
+  } = selected;
 
   const [mainType, secondaryType] = types;
 
@@ -40,11 +40,13 @@ const DetailPage = () => {
   return (
     <section>
       <header className={headerClassName}>
-        <TypeSvg type={mainType} className="absolute " />
+        <TypeSvg type={mainType} className="absolute" />
         <img
-          alt="pokemon sprite"
+          className="w-[288px] h-[288px] relative left-[71px] top-[84px]"
+          style={{ imageRendering: 'pixelated' }}
           src={pkmnSprite}
-          className="w-[288px] h-[288px] ml-[71px] relative"
+          aria-label={`${name} sprite`}
+          alt={`${name} sprite`}
         />
       </header>
       <div className="px-6 py-[15px] flex flex-col gap-5">

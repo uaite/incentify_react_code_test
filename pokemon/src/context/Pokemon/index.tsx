@@ -19,7 +19,7 @@ const PokemonProvider: FC<PokemonContextProps> = ({ children }) => {
     undefined
   );
 
-  const fetchPokemons = async ({ pageParam }) => {
+  const fetchPokemons = async ({ pageParam }: { pageParam: string }) => {
     const offset = Number(pageParam);
     const res = await client.listPokemons(offset, offset === 100 ? 51 : 50);
     return res;
@@ -43,7 +43,6 @@ const PokemonProvider: FC<PokemonContextProps> = ({ children }) => {
     const species = client.getPokemonSpeciesByName(selectedName);
 
     const [pkmnData, speciesData] = await Promise.all([pkmn, species]);
-
     return { pkmnData, speciesData };
   };
 
