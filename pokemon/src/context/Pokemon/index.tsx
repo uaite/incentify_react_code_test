@@ -1,7 +1,11 @@
 import type { FC } from 'react';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { PokemonContextProps, PokemonContextValue } from './types';
-import { AppPkmnDetail, getPokemonClient } from '../../helpers';
+import {
+  AppPkmnDetail,
+  getAppPkmnDetailFromApi,
+  getPokemonClient,
+} from '../../helpers';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 const PokemonContext = createContext<PokemonContextValue | undefined>(
@@ -21,11 +25,6 @@ const PokemonProvider: FC<PokemonContextProps> = ({ children }) => {
     return res;
   };
 
-  const fetchPokemonByName = async () => {
-    const res = await client.getPokemonByName(selectedName);
-    return res;
-  };
-
   const { data, isFetching, isFetchingNextPage, fetchNextPage } =
     useInfiniteQuery({
       queryKey: ['pokemonList'],
@@ -39,13 +38,28 @@ const PokemonProvider: FC<PokemonContextProps> = ({ children }) => {
       },
     });
 
-  const { data: pkmnData } = useQuery({
+  const fetchPokemonByName = async () => {
+    const pkmn = client.getPokemonByName(selectedName);
+    const species = client.getPokemonSpeciesByName(selectedName);
+
+    const [pkmnData, speciesData] = await Promise.all([pkmn, species]);
+
+    return { pkmnData, speciesData };
+  };
+
+  const { data: pkmnDetails } = useQuery({
     queryKey: ['pokemon', selectedName],
     queryFn: fetchPokemonByName,
     enabled: !!selectedName,
   });
 
-  console.log({ pkmnData });
+  useEffect(() => {
+    if (pkmnDetails) {
+      setSelected(
+        getAppPkmnDetailFromApi(pkmnDetails.pkmnData, pkmnDetails.speciesData)
+      );
+    }
+  }, [pkmnDetails]);
 
   const list =
     data?.pages.reduce((acum, cur) => acum.concat(cur.results as []), []) ?? [];
@@ -53,10 +67,10 @@ const PokemonProvider: FC<PokemonContextProps> = ({ children }) => {
   const value: PokemonContextValue = {
     list,
     data,
-    selected,
     isFetching,
     isFetchingNextPage,
     fetchNextPage,
+    selected,
     setSelected,
     selectedName,
     setSelectedName,

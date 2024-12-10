@@ -51,7 +51,7 @@ const TypeChip: React.FC<TypeChipProps> = ({ type }) => {
 
   return (
     <span className={wrapperClassName}>
-      <img {...{ src }} className="mr-2 h-[24px]" />
+      <img {...{ src }} className="mr-2 h-[26px]" />
       <p className="font-anonymous font-bold text-xs capitalize">{type}</p>
     </span>
   );
