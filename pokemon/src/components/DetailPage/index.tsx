@@ -14,7 +14,16 @@ import { usePokemon } from '@contexts/Pokemon';
 const DetailPage = () => {
   const { selected, isLoadingDetails } = usePokemon();
 
+  const wrapperClassName = 'relative h-full';
+
   if (!selected) {
+    if (isLoadingDetails) {
+      return (
+        <section className={wrapperClassName}>
+          <Spinner />
+        </section>
+      );
+    }
     return null;
   }
 
@@ -39,7 +48,7 @@ const DetailPage = () => {
   const formattedPkmnNo = PkmnNumberFormat.format(id);
 
   return (
-    <section className="relative h-full">
+    <section className={wrapperClassName}>
       {isLoadingDetails && <Spinner />}
       <header className={headerClassName}>
         <TypeSvg
@@ -61,13 +70,23 @@ const DetailPage = () => {
         </div>
         <div className="flex gap-[7px]">
           <TypeChip type={mainType} />
-          <TypeChip type={secondaryType} />
+          {secondaryType && <TypeChip type={secondaryType} />}
         </div>
         <div className="flex flex-wrap gap-5">
-          <StatChip name="weight" iconSrc={WeightSvg} value={weight} />
-          <StatChip name="height" iconSrc={HeightSvg} value={height} />
-          <StatChip name="species" iconSrc={SpeciesSvg} value={species} />
-          <StatChip name="ability" iconSrc={AbilitySvg} value={ability} />
+          <StatChip name="weight" iconSrc={WeightSvg} value={`${weight} kg`} />
+          <StatChip name="height" iconSrc={HeightSvg} value={`${height} m`} />
+          <StatChip
+            name="species"
+            iconSrc={SpeciesSvg}
+            value={species}
+            valueClassName="capitalize"
+          />
+          <StatChip
+            name="ability"
+            iconSrc={AbilitySvg}
+            value={ability}
+            valueClassName="capitalize"
+          />
         </div>
       </div>
     </section>

@@ -47,7 +47,7 @@ export type AppPkmnDetail = {
   image: string;
   height: number;
   weight: number;
-  types: string[];
+  types: [string, string?];
   ability: string;
   species: string;
 };
