@@ -3,5 +3,10 @@
 @tailwind utilities;
 
 #root {
-  padding: 2rem;
+  padding: 1.5rem;
+  height: 100dvh;
+  max-height: 100dvh;
+  min-width: 683px;
+  overflow: auto;
+  @apply bg-red-500;
 }
